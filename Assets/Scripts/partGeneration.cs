@@ -4,7 +4,7 @@
 //Project Title: Measured Alteration Of Generalized Procedural Generation For Robot Agility
 //Author: A'di Dust
 //Date Created: 6/29/2021
-//Last Modified: 7/19/2021
+//Last Modified: 7/23/2021
 //Description: File to handle object rendering
 ///-----------------------------------------------------------------------------------------------------------------
 
@@ -18,7 +18,6 @@ using UnityEngine.SceneManagement;
 ///parts and obstacles using alteration information.</summary>
 public class partGeneration : MonoBehaviour
 {
-    public SharedData dataParts;
     //width and height of available space for placement
     private List<double> width = new List<double>();
     private List<double> height = new List<double>();

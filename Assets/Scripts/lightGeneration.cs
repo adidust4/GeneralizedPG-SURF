@@ -4,7 +4,7 @@
 //Project Title: Measured Alteration Of Generalized Procedural Generation For Robot Agility
 //Author: A'di Dust
 //Date Created: 7/8/2021
-//Last Modified: 7/20/2021
+//Last Modified: 7/23/2021
 //Description: File to handle light rendering
 ///-----------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +16,6 @@ using System.Collections;
 ///inside and outside lighting using alteration information.</summary>
 public class lightGeneration : MonoBehaviour
 {
-    public SharedData dataLights;
     public Light [] lights;
     public double [] typicalIntensity;
     public double [] maxIntensityVariation;
@@ -118,38 +117,16 @@ public class lightGeneration : MonoBehaviour
         float sunTime = Random.Range(90 - (float)maxVariation, (float)maxVariation + 90);
         sun.transform.Rotate(sunTime, 0, 0, Space.Self);
         //uncomment line below to print sun rotation values:
-        // print("rotation: " + sun.Rotate());
+        //print("rotation: " + sun.Rotate());
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // intensityScore = dataLights.intensityScore;
-        // colorScore = dataLights.colorScore;
-        // sunScore = dataLights.sunScore;
         setLightStrength();
         setSunLight();
         setLightColor();
     }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            print("a");
-            sunScore = 0.5;
-            colorScore = 0.5;
-            intensityScore = 0.5;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        if(Input.GetKeyDown("b")){
-            print("b");
-            sunScore = 1;
-            colorScore = 1;
-            intensityScore = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Start();
-        }
-    }
 }
