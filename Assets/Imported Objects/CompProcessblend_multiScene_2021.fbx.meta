@@ -354,37 +354,7 @@ ModelImporter:
   - first:
       74: -3863364925382614000
     second: Empty.001|Text.005Action
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ConveyorMetal
-    second: {fileID: 2100000, guid: 3ed9bbb372d95024ba917c815a9b1442, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.003
-    second: {fileID: 2100000, guid: 9f1d85240d02dc94399f404d335050fa, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.006
-    second: {fileID: 2100000, guid: 23aea9fd5fdab864dbe3df1ae82b9ebe, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: beijPaint
-    second: {fileID: 2100000, guid: a1b62fe42f8da0644a162643941b9219, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blackRubber
-    second: {fileID: 2100000, guid: c20d319030cd0994597b0e5846aa9bc0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: conveyorBelt
-    second: {fileID: 2100000, guid: 99fb75b979c9a834ab499ce7f0142fb7, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -417,7 +387,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
