@@ -72,7 +72,7 @@ public class partGeneration : MonoBehaviour
                 }
                 frequency.Add(Mathf.RoundToInt(Random.Range(min, typicalNumOfParts[i] + variation)));
                 //uncomment line below to print frequency values:
-                // print("frequency[" + i + "]: " + frequency[i]);
+                //print("frequency[" + i + "]: " + frequency[i]);
                 }
         }
     }
@@ -91,7 +91,7 @@ public class partGeneration : MonoBehaviour
                 orientations[i].Add(Random.Range(0-maxRotation[i], maxRotation[i]));
             }
             //uncomment line below to print orientation values:
-            // print("Orientations[" + i + "]: " + string.Join(", ", orientations[i]));
+            //print("Orientations[" + i + "]: " + string.Join(", ", orientations[i]));
         }
     }
 
@@ -141,7 +141,7 @@ public class partGeneration : MonoBehaviour
             }
         }
         //uncomment line below to print position values:
-        // print("Positions[" + i + "]: " + string.Join(", ", positions[i]));
+        //print("Positions[" + i + "]: " + string.Join(", ", positions[i]));
     }
 
 
@@ -155,7 +155,7 @@ public class partGeneration : MonoBehaviour
                 if(part1.transform.position.x < minX[partIndex] || part1.transform.position.x > maxX[partIndex] || part1.transform.position.y < minY[partIndex] || part1.transform.position.y > maxY[partIndex] || part1.transform.position.z < minZ[partIndex] || part1.transform.position.z > maxZ[partIndex])
                 {
                     //uncomment below to see where objects were destroyed:
-                    // print(partIndex + " destroyed at:  " + part.position);
+                    //print(partIndex + " destroyed at:  " + part.position);
                     if(!partObject[partIndex].Equals(part.gameObject)){
                         Destroy(part.gameObject);
                     }
@@ -172,7 +172,6 @@ public class partGeneration : MonoBehaviour
         Physics.autoSimulation = false;
         for(int i = 0; i < partObject.Count(); i++)
         {
-            // simulatedBodies = simulatedBodies.AsQueryable().Where(a => a.gameObject.name.Contains(partObject[i].name)).ToArray();
             for(int j = 0; j < maxIterations; j++)
             {
                 Physics.Simulate(Time.fixedDeltaTime);
@@ -190,9 +189,6 @@ public class partGeneration : MonoBehaviour
 
     void Awake()
     {
-        // frequencyScore = dataParts.frequencyScore;
-        // spacingScore = dataParts.spacingScore;
-        // orientationScore = dataParts.orientationScore;
         setFrequency();
         setOrientations();
         
@@ -220,7 +216,6 @@ public class partGeneration : MonoBehaviour
             {
                 if(positions[i].Count() > j)
                 {
-                    // Instantiate(partObject[i], positions[i][j], Quaternion.Euler(new Vector3(orientations[i][j], 0, 0)));
                     Instantiate(partObject[i], positions[i][j], Quaternion.Euler(new Vector3(orientations[i][j], 0, 0)));
                 }
             }
@@ -232,25 +227,5 @@ public class partGeneration : MonoBehaviour
             Destroy(part.GetComponent<MeshRenderer>());
         }
     }
-
-    void Update()
-    {
-        // if(Input.GetKeyDown(KeyCode.F))
-        // {
-        //     dataParts.spacingScore = 0.5;
-        //     dataParts.orientationScore = 0.5;
-        //     dataParts.frequencyScore = 0.5;
-        //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //     Awake();
-        // }
-        // if(Input.GetKeyDown(KeyCode.T)){
-        //     dataParts.spacingScore = 1;
-        //     dataParts.orientationScore = 1;
-        //     dataParts.frequencyScore = 1;
-        //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //     Awake();
-        // }
-    }
-
     
 }

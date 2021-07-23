@@ -99,7 +99,7 @@ public class lightGeneration : MonoBehaviour
 
             lights[i].color = (new Color(R, G, B, A));
             //uncomment line below to print color values:
-            // print("color[" + i + "]: " + lights[i].color.r + ", " + lights[i].color.g + ", " + lights[i].color.b + ", " + lights[i].color.a);
+            //print("color[" + i + "]: " + lights[i].color.r + ", " + lights[i].color.g + ", " + lights[i].color.b + ", " + lights[i].color.a);
         }
     }
 
