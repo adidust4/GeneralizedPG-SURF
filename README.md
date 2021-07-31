@@ -1,6 +1,6 @@
 # GeneralizedPG-SURF
 
-_______________________________________________________________________
+
 ## How to Use
 
 
@@ -58,7 +58,6 @@ By clicking on *Generate Parts*, *Generate Obstacles*, and *Generate Lights* in 
 - **Sun Score** - The alteration level, where 0 <= L <= 1 for outside simulated light position (where the initial position is directly above).
 - **Color Score** - The alteration level, where 0 <= L <= 1 for inside light color.
 
-_______________________________________________________________________
 
 ## Script Descriptions
 
