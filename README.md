@@ -59,3 +59,77 @@ By clicking on *Generate Parts*, *Generate Obstacles*, and *Generate Lights* in 
 - **Color Score** - The alteration level, where 0 <= L <= 1 for inside light color.
 
 _______________________________________________________________________
+
+## Script Descriptions
+
+Within the *Assets* -> *Scripts* Folder, there are two .cs scripts and their .meta counterparts that come with the program. Each method contains a commented line that allows for printed method testing. Simply uncomment to run the test. 
+
+### Light Generation
+
+This file contains 4 methods and 7 class variables. The 7 variables are public, and described within the **Using the Inspector for Generation** section of this README, under *Generate Lights*. A description of each of these methods are below. 
+
+#### setLightStrength()
+This method sets the inside light intensity somewhere between typical intensity +/- (score*max variation)
+
+#### setLightColor()
+This method sets inside light color somewhere between typical color +/- (score*max variation) for each r, g, b, and a value.
+
+#### setSunLight()
+This method creates a simulated sun, and changes its position somewhere between mid-day (directly above) +/- (score*max variation)
+
+#### Start()
+This method calls **setLightStrength**, **setLightColor**, and **setSunLight** at the start of the scene so that lighting can be altered and then rendered. 
+
+
+### Part Generation
+
+This file contains 7 methods, 15 public class variables, and 9 private class variables. The 15 public variables are described within the **Using the Inspector for Generation** section of this README, under *Generate Parts & Obstacles*. A description of each private variable and method are below. 
+
+#### List - partWidth
+A list of each part and obstacles widths. This is determined by taking maxX - minX.
+
+#### List - partDepth
+A list of each part and obstacles depths. This is determined by taking maxZ - minZ.
+
+#### List - partHeight
+A list of each part and obstacles heights. This is determined by taking maxY - minY.
+
+#### List - frequency
+A list of resulting frequencies for each part and obstacle object type.
+
+#### List of List - positions
+A list of positions for ever part and every object in the scene.
+
+#### Int - numOfOrientations
+The number of orientations for each part and obstacle object type.
+
+#### List of List - orientations
+A list of orientations for ever part and every object in the scene.
+
+#### setFrequency()
+This method sets the part or object frequency somewhere between typical frequency +/- (score*max variation)
+
+#### setOrientations()
+This method sets the part or obstacle orientations somewhere between typical orientation +/- (score*max variation)
+
+#### createPositions(int i)
+This method sets the starting positions of each part or obstacle from the bottom back left with typical spacing. *int i* is a variable which lists the index of the list of objects to vary.
+
+#### varyPositions(int i, double maxVariance)
+This method moves parts or obstacles to be changed within a random spacing somewhere between typical spacing +/- (score*max variation). *int i* is a variable which lists the index of the list of objects to vary and *double maxVariance* is the corresponding maximum alteration.
+
+#### partsAreInPlace(Rigidbody [] parts, int partIndex)
+This method checks that each part or obstacle is still within defined bounds, and if it isn't, it destroys said part or obstacle. *igidbody [] parts* is a variable contains a list of all parts and obstacles in the scene, and *int partIndex* is an index of which part or obstacle it needs to compare boundaries with.
+
+#### setFinalPlacement()
+This method simulates the effects of gravity manually to place and destroy before start of scene.
+
+#### Awake()
+This method calls all other methods at the start of the scene so that parts and obstacles can be altered, destroyed as needed, and then rendered.
+
+
+ 
+ 
+
+
+
