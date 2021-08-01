@@ -4,7 +4,7 @@
 //Project Title: Measured Alteration Of Generalized Procedural Generation For Robot Agility
 //Author: A'di Dust
 //Date Created: 6/29/2021
-//Last Modified: 7/23/2021
+//Last Modified: 8/1/2021
 //Description: File to handle object rendering
 ///-----------------------------------------------------------------------------------------------------------------
 
@@ -22,8 +22,6 @@ public class partGeneration : MonoBehaviour
     private List<double> width = new List<double>();
     private List<double> height = new List<double>();
     //part/obstacle dimensions
-    private List<double>  partWidth = new List<double>();
-    private List<double> partHeight = new List<double>();
     private List<double> partDepth = new List<double>();
     //boundaries of space for placement
     public List<double> minX;
@@ -48,6 +46,8 @@ public class partGeneration : MonoBehaviour
     private List<List<float>> orientations = new List<List<float>>();
     //prefabs to use
     public List<GameObject> partObject;
+    //keep track of update frames
+    private int frame = 0;
 
 
 
@@ -78,12 +78,12 @@ public class partGeneration : MonoBehaviour
         for(int i = 0; i < partObject.Count(); i++)
         {
             orientations.Insert(i, new List<float>());
-            double variation = (maxRotation[i]*orientationScore);
-            double min = 0 - variation;
-            double max = variation;
+            float variation = (float) (maxRotation[i]*orientationScore);
+            float min = 0 - variation;
+            float max = variation;
             for(int j = 0; j < frequency[i]; j++)
             {
-                orientations[i].Add(Random.Range((float)min, (float)max));
+                orientations[i].Add(Random.Range(min, max));
                 //uncomment line below to print orientation values:
                 // print("Orientations[" + i + ", " + j + "]: " + string.Join(", ", orientations[i][j]));
             }
@@ -101,9 +101,9 @@ public class partGeneration : MonoBehaviour
         double y = minY[i];
         while(y < maxY[i] && count < frequency[i])
         {
-            for(double z = maxZ[i] - (partHeight[i]/2); z >= minZ[i] + (partHeight[i]/2); z = z - typicalSpacing[i] - partHeight[i])
+            for(double z = maxZ[i]; z >= minZ[i]; z = z - typicalSpacing[i])
             {
-                for(double x = minX[i] + (partWidth[i]/2); x <= maxX[i] - (partWidth[i]/2); x = x + typicalSpacing[i] + partWidth[i])
+                for(double x = minX[i]; x <= maxX[i]; x = x + typicalSpacing[i])
                 {
                     positions[i].Add(new Vector3((float)x, (float)y, (float)z));
                     count++;
@@ -125,17 +125,19 @@ public class partGeneration : MonoBehaviour
         double variation = (maxSpaceVariation[i]*spacingScore);
         double min = 0 - variation;
         double max = variation;
+
         for(int j = 0; j < positions[i].Count(); j++)
         {
-            double randomXVariation = Random.Range((float)min, (float)max);
-            double randomZVariation = Random.Range((float)min, (float)max);
-            if(randomXVariation + positions[i][j].x < maxX[i] && randomXVariation + positions[i][j].x > minX[i])
+            double randomXVariation = Random.Range((float)min, (float)max) + positions[i][j].x;
+            double randomZVariation = Random.Range((float)min, (float)max) + positions[i][j].z;
+
+            if(randomXVariation < maxX[i] && randomXVariation > minX[i])
             {
-                positions[i][j] = new Vector3(positions[i][j].x + (float)randomXVariation, (float)minY[i] , positions[i][j].z);
+                positions[i][j] = new Vector3((float)randomXVariation, (float)positions[i][j].y, positions[i][j].z);
             }
-            if(randomXVariation + positions[i][j].z < maxZ[i] && randomZVariation + positions[i][j].z > minZ[i])
+            if(randomZVariation < maxZ[i] && randomZVariation > minZ[i])
             {
-                positions[i][j] = new Vector3(positions[i][j].x, (float)minY[i], positions[i][j].z + (float)randomZVariation);
+                positions[i][j] = new Vector3(positions[i][j].x, (float)positions[i][j].y, (float)randomZVariation);
             }
         }
         //uncomment line below to print position values:
@@ -199,9 +201,8 @@ public class partGeneration : MonoBehaviour
             {
                 bounds.Encapsulate(renderer.bounds);
             }
-            partWidth.Add(bounds.size.x);
-            partHeight.Add(bounds.size.z);
             partDepth.Add(bounds.size.y);
+            
             //find dimensions of part space for placement
             width.Add(maxX[i] - minX[i]);
             height.Add(maxZ[i] - minZ[i]);
@@ -218,11 +219,23 @@ public class partGeneration : MonoBehaviour
                 }
             }
         }
+
         setFinalPlacement();
+
         //destroy original prefabs
         foreach(GameObject part in partObject)
         {
             Destroy(part.GetComponent<MeshRenderer>());
+        }
+    }
+
+    void Update()
+    {
+        //This is very computationally costly, but ensures that parts are
+        //only in the correct place. Decrease frames as needed or comment out
+        //these lines if there are computational limits. 
+        if(frame <= 500){
+            setFinalPlacement();
         }
     }
     
