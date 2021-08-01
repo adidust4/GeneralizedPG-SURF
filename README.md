@@ -1,4 +1,8 @@
-# GeneralizedPG-SURF
+# Measured Alteration of Generalized Procedural Generation for Robot Agility
+
+## Project Background/Use
+
+For information about the algorithmic approach and general background of this project, read the report here: https://www.overleaf.com/read/vxhbdjdqryqb
 
 
 ## How to Use
