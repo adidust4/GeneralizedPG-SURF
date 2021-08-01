@@ -45,7 +45,6 @@ public class partGeneration : MonoBehaviour
     //orientation variables
     public List<float> maxRotation;
     public double orientationScore;
-    private int numOfOrientations;
     private List<List<float>> orientations = new List<List<float>>();
     //prefabs to use
     public List<GameObject> partObject;
@@ -55,25 +54,19 @@ public class partGeneration : MonoBehaviour
     ///<summary>Sets number of objects somewhere between typical frequency
     ///+/- (score*max frequency)</summary>
     public void setFrequency()
-    {
-        int min = 0; 
+    { 
         for(int i = 0; i < partObject.Count(); i++)
         {
-            int variation = Mathf.RoundToInt((float)((double)maxFrequencyVariation[i] * frequencyScore));
-            if(typicalNumOfParts[i] + variation <= 0)
+            int variation = (int) Mathf.RoundToInt((float)(maxFrequencyVariation[i]*frequencyScore));
+            int min = (int) (typicalNumOfParts[i] - variation);
+            int max = (int) (typicalNumOfParts[i] + variation);
+            if(min < 0)
             {
-                frequency.Add(0);
+                min = 0;
             }
-            else
-            {
-                if (typicalNumOfParts[i] - variation > 0)
-                {
-                    min = typicalNumOfParts[i] - variation;
-                }
-                frequency.Add(Mathf.RoundToInt(Random.Range(min, typicalNumOfParts[i] + variation)));
-                //uncomment line below to print frequency values:
-                //print("frequency[" + i + "]: " + frequency[i]);
-                }
+            frequency.Add((int) Mathf.RoundToInt(Random.Range((float)min, (float)max)));
+            //uncomment line below to print frequency values:
+            // print("frequency[" + i + "]: " + frequency[i]);
         }
     }
 
@@ -85,13 +78,15 @@ public class partGeneration : MonoBehaviour
         for(int i = 0; i < partObject.Count(); i++)
         {
             orientations.Insert(i, new List<float>());
-            numOfOrientations = Formulas.setPartOrientation(frequency[i], orientationScore);
+            double variation = (maxRotation[i]*orientationScore);
+            double min = 0 - variation;
+            double max = variation;
             for(int j = 0; j < frequency[i]; j++)
             {
-                orientations[i].Add(Random.Range(0-maxRotation[i], maxRotation[i]));
+                orientations[i].Add(Random.Range((float)min, (float)max));
+                //uncomment line below to print orientation values:
+                // print("Orientations[" + i + ", " + j + "]: " + string.Join(", ", orientations[i][j]));
             }
-            //uncomment line below to print orientation values:
-            //print("Orientations[" + i + "]: " + string.Join(", ", orientations[i]));
         }
     }
 
@@ -100,7 +95,6 @@ public class partGeneration : MonoBehaviour
     ///with typical spacing and then adjust by typical spacing +/- (score*max spacing)</summary>
     public void createPositions(int i){
         positions.Insert(i, new List<Vector3>());
-        double maxVariance = Formulas.setPartSpacing(frequency[i], maxSpaceVariation[i], spacingScore);
         //start with parts starting from bottom back left with typical spacing untl runs out of room
         //or objects
         int count = 0;
@@ -121,21 +115,25 @@ public class partGeneration : MonoBehaviour
             }
             y = y + partDepth[i];
         }
-        varyPositions(i, maxVariance);
+        
+        varyPositions(i);
     }
 
 
     ///<summary>Move objects to be changed within a random range of variance specified by user.</summary>
-    private void varyPositions(int i, double maxVariance){
+    private void varyPositions(int i){
+        double variation = (maxSpaceVariation[i]*spacingScore);
+        double min = 0 - variation;
+        double max = variation;
         for(int j = 0; j < positions[i].Count(); j++)
         {
-            double randomXVariation = Random.Range(0, (float)maxVariance);
-            double randomZVariation = Random.Range(0, (float)maxVariance);
-            if(randomXVariation + positions[i][j].x < minX[i] + width[i] - typicalSpacing[i] - (partWidth[i]/2))
+            double randomXVariation = Random.Range((float)min, (float)max);
+            double randomZVariation = Random.Range((float)min, (float)max);
+            if(randomXVariation + positions[i][j].x < maxX[i] && randomXVariation + positions[i][j].x > minX[i])
             {
                 positions[i][j] = new Vector3(positions[i][j].x + (float)randomXVariation, (float)minY[i] , positions[i][j].z);
             }
-            if(randomZVariation + positions[i][j].z < maxZ[i] - typicalSpacing[i] - (partHeight[i]/2))
+            if(randomXVariation + positions[i][j].z < maxZ[i] && randomZVariation + positions[i][j].z > minZ[i])
             {
                 positions[i][j] = new Vector3(positions[i][j].x, (float)minY[i], positions[i][j].z + (float)randomZVariation);
             }
