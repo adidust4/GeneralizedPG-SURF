@@ -2,6 +2,8 @@
 
 ## Project Background/Use
 
+This project is a deliverable for the summer of 2021 NIST SURF program by A'di Dust. The project was done in collaboration with Dr. William Harrison and the support of NIST's Engineering Laboratory - Intelligent Systems Division - Cognition and Collaborative Systems group.
+
 For information about the algorithmic approach and general background of this project, read the report here: https://www.overleaf.com/read/vxhbdjdqryqb
 
 
