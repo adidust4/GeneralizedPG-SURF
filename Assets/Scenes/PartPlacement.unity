@@ -457,9 +457,9 @@ MonoBehaviour:
   - 2
   typicalLightColor:
   - {r: 0.9991979, g: 1, b: 0.8915094, a: 1}
-  intensityScore: 0.5
-  sunScore: 0.5
-  colorScore: 0.5
+  intensityScore: 1
+  sunScore: 1
+  colorScore: 1
 --- !u!4 &410747340
 Transform:
   m_ObjectHideFlags: 0
@@ -1711,24 +1711,24 @@ MonoBehaviour:
   - 19.8
   typicalNumOfParts: 28000000280000002800000028000000
   maxFrequencyVariation: 0a0000000a0000000a0000000a000000
-  frequencyScore: 0.5
+  frequencyScore: 1
   typicalSpacing:
-  - 50
-  - 50
-  - 50
-  - 50
+  - 5
+  - 5
+  - 5
+  - 5
   maxSpaceVariation:
-  - 8
-  - 8
-  - 8
-  - 8
-  spacingScore: 0.5
+  - 1
+  - 1
+  - 1
+  - 1
+  spacingScore: 1
   maxRotation:
   - 90
   - 90
   - 90
   - 90
-  orientationScore: 0
+  orientationScore: 1
   partObject:
   - {fileID: 3302926334331845334}
   - {fileID: 3862421545000388694}
@@ -2997,18 +2997,18 @@ MonoBehaviour:
   - 18
   typicalNumOfParts: 3200000032000000
   maxFrequencyVariation: 0a0000000a000000
-  frequencyScore: 0.5
+  frequencyScore: 1
   typicalSpacing:
   - 10
   - 10
   maxSpaceVariation:
-  - 6
-  - 6
-  spacingScore: 0.5
+  - 2
+  - 2
+  spacingScore: 1
   maxRotation:
   - 45
   - 45
-  orientationScore: 0.5
+  orientationScore: 1
   partObject:
   - {fileID: 8609806729073809418}
   - {fileID: 1266877213047812456}
