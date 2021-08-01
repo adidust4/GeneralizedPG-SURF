@@ -30,13 +30,19 @@ public class lightGeneration : MonoBehaviour
     {
         for(int i = 0; i < lights.Length; i++)
         {
-            double min = typicalIntensity[i];
-            double variation = intensityScore * maxIntensityVariation[i];
-            if (typicalIntensity[i] - variation > 0)
+
+            int variation = (int) Mathf.RoundToInt((float)(maxIntensityVariation[i]*intensityScore));
+            int min = (int) (typicalIntensity[i] - variation);
+            int max = (int) (typicalIntensity[i] + variation);
+            if(min < 0)
             {
-                min = typicalIntensity[i] - variation;
+                min = 0;
             }
-            double intensity = Random.Range((float)min, (float) (typicalIntensity[i] + variation));
+            if(max > 8)
+            {
+                max = 8;
+            }
+            double intensity = Random.Range((float)min, (float) max);
             lights[i].intensity = Mathf.RoundToInt((float)intensity);
             //uncomment line below to print intensity values:
             //print("intensity[" + i + "]: " + lights[i].intensity);
